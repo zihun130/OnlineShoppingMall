@@ -1,5 +1,6 @@
 package atguigu.com.onlineshoppingmall.home;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -35,6 +36,7 @@ public class HomePagerFragment extends BaseFragment {
     @InjectView(R.id.ib_top)
     ImageButton ibTop;
     private HomeAdapter adapter;
+    private HomePagerBean.ResultBean result;
 
     @Override
     public View initview() {
@@ -71,9 +73,12 @@ public class HomePagerFragment extends BaseFragment {
 
     private void proressData(String response) {
         HomePagerBean homeBean= JSON.parseObject(response,HomePagerBean.class);
+        result = homeBean.getResult();
 
-        adapter=new HomeAdapter(context,HomePagerBean);
+        adapter=new HomeAdapter(context,result);
         rvHome.setAdapter(adapter);
+        //设置布局管理器
+        rvHome.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
     }
 
     @Override

@@ -1,13 +1,12 @@
-package atguigu.com.onlineshoppingmall.domain;
+package com.atguigu.shoppingmall_1020.domain;
 
 import java.util.List;
 
 /**
- * Created by sun on 2017/6/11.
+ * Created by sun on 2017/6/12.
  */
 
-public class HomePagerBean {
-
+public class HomeBean {
 
     /**
      * code : 200

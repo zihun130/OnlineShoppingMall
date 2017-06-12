@@ -1,4 +1,4 @@
-package atguigu.com.onlineshoppingmall.utils;
+package com.atguigu.shoppingmall_1020.utils;
 
 /**
  * Created by sun on 2017/6/11.
