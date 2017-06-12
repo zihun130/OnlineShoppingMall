@@ -79,6 +79,7 @@ public class HomePagerFragment extends BaseFragment {
         rvHome.setAdapter(adapter);
         //设置布局管理器
         rvHome.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+
     }
 
     @Override
@@ -97,7 +98,7 @@ public class HomePagerFragment extends BaseFragment {
                 Toast.makeText(context, "进入消息中心", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ib_top:
-                Toast.makeText(context, "返回", Toast.LENGTH_SHORT).show();
+                rvHome.scrollToPosition(0);
                 break;
         }
     }

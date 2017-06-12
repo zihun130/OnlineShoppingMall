@@ -1,5 +1,6 @@
 package com.atguigu.shoppingmall_1020.home.fragment;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -7,6 +8,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.shoppingmall_1020.R;
+import com.atguigu.shoppingmall_1020.adapter.HomePagerAdapter;
 import com.atguigu.shoppingmall_1020.base.BaseFragment;
 import com.atguigu.shoppingmall_1020.domain.HomeBean;
 import com.atguigu.shoppingmall_1020.utils.Constants;
@@ -32,11 +34,16 @@ public class HomeFragment extends BaseFragment {
     TextView tvMessageHome;
     @InjectView(R.id.ib_top)
     ImageButton ibTop;
+    private RecyclerView rv_home;
+    private HomeBean.ResultBean result;
+    private HomePagerAdapter adapter;
+
 
     @Override
     public View initView() {
         View view = View.inflate(mContext, R.layout.fragment_home, null);
         ButterKnife.inject(this, view);
+        rv_home = (RecyclerView) view.findViewById(R.id.rv_home);
         return view;
     }
 
@@ -67,7 +74,9 @@ public class HomeFragment extends BaseFragment {
 
     private void proressData(String response) {
         HomeBean homeBean= JSON.parseObject(response,HomeBean.class);
-
+         result = homeBean.getResult();
+         adapter=new HomePagerAdapter(mContext,result);
+         rv_home.setAdapter(adapter);
     }
 
     @Override
