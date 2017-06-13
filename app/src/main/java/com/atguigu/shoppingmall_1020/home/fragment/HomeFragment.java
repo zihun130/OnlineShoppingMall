@@ -1,5 +1,6 @@
 package com.atguigu.shoppingmall_1020.home.fragment;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -77,6 +78,7 @@ public class HomeFragment extends BaseFragment {
          result = homeBean.getResult();
          adapter=new HomePagerAdapter(mContext,result);
          rv_home.setAdapter(adapter);
+        rv_home.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
     }
 
     @Override
