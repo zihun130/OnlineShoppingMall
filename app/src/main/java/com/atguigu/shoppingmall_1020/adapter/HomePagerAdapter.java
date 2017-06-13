@@ -1,17 +1,21 @@
 package com.atguigu.shoppingmall_1020.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.shoppingmall_1020.R;
 import com.atguigu.shoppingmall_1020.adapter.homeadapter.ChannelGridAdapter;
+import com.atguigu.shoppingmall_1020.adapter.homeadapter.SecKillAdapter;
 import com.atguigu.shoppingmall_1020.adapter.homeadapter.ViewPagerAdapter;
 import com.atguigu.shoppingmall_1020.domain.HomeBean;
 import com.atguigu.shoppingmall_1020.utils.Constants;
@@ -23,6 +27,8 @@ import com.zhy.magicviewpager.transformer.RotateYTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.iwgang.countdownview.CountdownView;
 
 /**
  * Created by sun on 2017/6/12.
@@ -205,14 +211,56 @@ public class HomePagerAdapter extends RecyclerView.Adapter {
         }
     }
 
-
+    private boolean isFrist=false;
     private class SeckillViewHolder extends RecyclerView.ViewHolder {
 
-        public SeckillViewHolder(View itemView) {
+        private final Context context;
+        private RecyclerView rv_seckill;
+        private TextView     tv_more_seckill;
+        private CountdownView  countdownview;
+        private SecKillAdapter adapter;
+
+        Handler handler=new Handler();
+        private HomeBean.ResultBean.SeckillInfoBean seckillinfo;
+
+        private Runnable refreshTimeSecKill=new Runnable() {
+            @Override
+            public void run() {
+                long currentTime=System.currentTimeMillis();
+
+                if(currentTime>=Long.parseLong(seckillinfo.getEnd_time())){
+                    handler.removeCallbacksAndMessages(null);
+                }else {
+                    countdownview.updateShow(Long.parseLong(seckillinfo.getEnd_time())-currentTime);
+                    handler.postDelayed(refreshTimeSecKill,1000);
+                }
+            }
+        };
+
+        public void startRefreshTime() {
+            handler.postDelayed(refreshTimeSecKill, 10);
+        }
+        public SeckillViewHolder(Context context, View itemView) {
             super(itemView);
+            this.context=context;
+            rv_seckill = (RecyclerView) itemView.findViewById(R.id.rv_seckill);
+            tv_more_seckill = (TextView) itemView.findViewById(R.id.tv_more_seckill);
+            countdownview = (CountdownView) itemView.findViewById(R.id.countdownview);
         }
 
         public void setData(HomeBean.ResultBean.SeckillInfoBean seckill_info) {
+            this.seckillinfo=seckill_info;
+            adapter=new SecKillAdapter(context,seckill_info);
+            rv_seckill.setAdapter(adapter);
+            rv_seckill.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+
+            if(!isFrist){
+                isFrist=true;
+                long totleTime=Long.parseLong(seckillinfo.getEnd_time())-Long.parseLong(seckillinfo.getStart_time());
+                long currTime=System.currentTimeMillis();
+                seckillinfo.setEnd_time(currTime+totleTime+"");
+                startRefreshTime();
+            }
 
         }
     }
