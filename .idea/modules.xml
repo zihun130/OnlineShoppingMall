@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FlycoTabLayout_Lib/FlycoTabLayout_Lib.iml" filepath="$PROJECT_DIR$/FlycoTabLayout_Lib/FlycoTabLayout_Lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlycoTabLayout_app/FlycoTabLayout_app.iml" filepath="$PROJECT_DIR$/FlycoTabLayout_app/FlycoTabLayout_app.iml" />
       <module fileurl="file://$PROJECT_DIR$/GuiGuShoppingMall/GuiGuShoppingMall.iml" filepath="$PROJECT_DIR$/GuiGuShoppingMall/GuiGuShoppingMall.iml" />
       <module fileurl="file://$PROJECT_DIR$/OnlineShoppingMall.iml" filepath="$PROJECT_DIR$/OnlineShoppingMall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ShoppingMallapp/ShoppingMallapp.iml" filepath="$PROJECT_DIR$/ShoppingMallapp/ShoppingMallapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gradationscroll/gradationscroll.iml" filepath="$PROJECT_DIR$/gradationscroll/gradationscroll.iml" />
     </modules>
   </component>
 </project>

@@ -1,12 +1,20 @@
 package com.atguigu.shoppingmall_1020.type.fragment;
 
-import android.graphics.Color;
-import android.util.Log;
-import android.view.Gravity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.atguigu.shoppingmall_1020.R;
 import com.atguigu.shoppingmall_1020.base.BaseFragment;
+import com.flyco.tablayout.listener.OnTabSelectListener;
+
+import java.util.ArrayList;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * 作者：尚硅谷-杨光福 on 2017/2/22 11:36
@@ -15,14 +23,20 @@ import com.atguigu.shoppingmall_1020.base.BaseFragment;
  * 作用：分类Fragment
  */
 public class TypeFragment extends BaseFragment {
-    private TextView textView;
+    @InjectView(R.id.tl_1)
+    com.flyco.tablayout.SegmentTabLayout tl1;
+    @InjectView(R.id.iv_type_search)
+    ImageView ivTypeSearch;
+    private ArrayList<BaseFragment> fragments;
+    private java.lang.String[] titles={"分类","标签"};
+    private Fragment tempfragment;
+    private Fragment currentFagment;
+
     @Override
     public View initView() {
-        textView = new TextView(mContext);
-        textView.setTextSize(20);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.RED);
-        return textView;
+        View view = View.inflate(mContext, R.layout.fragment_type, null);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     /**
@@ -33,7 +47,62 @@ public class TypeFragment extends BaseFragment {
     public void initData() {
         super.initData();
 
-        Log.e("TAG","分类的数据被初始化了...");
-        textView.setText("分类内容");
+        tl1.setTabData(titles);
+        tl1.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                switchFragment(position);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+
+        initFragment();
+    }
+
+    private void switchFragment(int position) {
+
+        currentFagment=fragments.get(position);
+
+        if(tempfragment!=currentFagment){
+            if(currentFagment!=null){
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                if(!currentFagment.isAdded()){
+                    if(tempfragment!=null){
+                        ft.hide(tempfragment);
+                    }
+                    ft.add(R.id.fl_type,currentFagment);
+                }else {
+                    if(tempfragment!=null){
+                        ft.hide(tempfragment);
+                    }
+                    ft.show(currentFagment);
+                }
+
+                ft.commit();
+            }
+            tempfragment=currentFagment;
+        }
+    }
+
+    private void initFragment() {
+        fragments=new ArrayList<>();
+        fragments.add(new ListViewFragment());
+        fragments.add(new TagFrament());
+        switchFragment(0);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
+    @OnClick(R.id.iv_type_search)
+    public void onViewClicked() {
+        Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
     }
 }

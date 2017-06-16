@@ -9,8 +9,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/FlycoTabLayout_Lib" />
+            <option value="$PROJECT_DIR$/FlycoTabLayout_app" />
             <option value="$PROJECT_DIR$/GuiGuShoppingMall" />
+            <option value="$PROJECT_DIR$/ShoppingMallapp" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/gradationscroll" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,6 +1,6 @@
 package atguigu.com.onlineshoppingmall.home;
 
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -78,8 +78,20 @@ public class HomePagerFragment extends BaseFragment {
         adapter=new HomeAdapter(context,result);
         rvHome.setAdapter(adapter);
         //设置布局管理器
-        rvHome.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
 
+        GridLayoutManager liner=new GridLayoutManager(context,1);
+        liner.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+            @Override
+            public int getSpanSize(int position) {
+                if(position<=4){
+                    ibTop.setVisibility(View.GONE);
+                }else {
+                    ibTop.setVisibility(View.VISIBLE);
+                }
+                return 1;
+            }
+        });
+        rvHome.setLayoutManager(liner);
     }
 
     @Override

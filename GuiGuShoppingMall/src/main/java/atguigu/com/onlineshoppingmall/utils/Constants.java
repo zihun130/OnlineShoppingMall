@@ -5,7 +5,7 @@ package atguigu.com.onlineshoppingmall.utils;
  */
 
 public class Constants {
-    //public static String BASE_URL = "http://10.0.2.2:8080/atguigu";
+    //public static String BASE_URL = "http://192.168.31.38:8080/atguigu";
 
     public static String BASE_URL = "http://47.93.118.241:8081/android/resources";
     private static final String BASE_URL_JSON = BASE_URL+"/json/";

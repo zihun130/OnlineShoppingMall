@@ -2,28 +2,34 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="atguigu.com.onlineshoppingmall">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/atguigu_logo"
+        android:icon="@drawable/timg"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeActivity"
-            android:theme="@style/AppThemeTwo"
-            >
+        <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/AppThemeTwo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:launchMode="singleTask"
-            android:configChanges="orientation|screenSize|keyboardHidden">
-
-        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".app.GoodsInfoActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".app.WebViewActivity" />
+        <activity android:name=".user.LoginActivity" />
+        <activity android:name=".app.GoodsListActivity" />
+        <activity android:name=".app.CallCenterActivity"></activity>
     </application>
 
 </manifest>
